@@ -1,0 +1,65 @@
+10.201.47.218
+
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.13 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 6f:af:37:34:5e:47:d6:06:08:99:a2:70:bf:38:6b:0b (RSA)
+|   256 a6:b4:a2:86:5a:42:c2:17:1e:f8:d9:be:bf:9f:4b:42 (ECDSA)
+|_  256 e9:64:a8:a2:be:7d:ba:28:85:e7:f9:4a:ba:d2:18:a2 (ED25519)
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-title: Publisher's Pulse: SPIP Insights & Tips
+| http-methods: 
+|_  Supported Methods: POST OPTIONS HEAD GET
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.201.47.218
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirb/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.hta                 (Status: 403) [Size: 278]
+/.htpasswd            (Status: 403) [Size: 278]
+/.htaccess            (Status: 403) [Size: 278]
+/images               (Status: 301) [Size: 315] [--> http://10.201.47.218/images/]
+/index.html           (Status: 200) [Size: 8686]
+/server-status        (Status: 403) [Size: 278]
+
+/spip - wordlist seclists big.txt
+
+whatweb no /spip revela a versaao dele.
+
+
+Possivel RCE no servco q esta rodando na aplicaca (SPIP)
+
+subimos uma webshell, pegamos a id_rsa no diretorio do usuario e conseguimos acesso SSH.
+
+find / -perm -u=s -type f 2>/dev/null
+
+achamos um binario diferente.
+strings nele para bsucar por coisas interessantes.
+
+Eu nao podia listar o diretorio /opt, porem, dando um ls -lah /opt/run_container.sh eu puder ver suas permissoes.
+
+Isso parecia ser obra do AppArmor. Para checar se esta ativo: cat /sys/module/apparmor/parameters/enabled
+
+Olhando o /etc/passwd/ vemos que o nosso usuario nao esta suando bash mas sim ash, e ao olhar o /etc/apparmor.d vemos um profile para a nossa shell.
+
+-rw-r--r--   1 root root  532 Feb 12  2024 usr.sbin.ash
+
+A sacada aqui vai ser executar o bash e para sair fora desse apparmo. Para isso sera usada a tecnica de usar um dynamic linker/loader para spawnar o /bin/bash carregando todas a shared libraries necessarias para ele.
+
+/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /bin/bash
