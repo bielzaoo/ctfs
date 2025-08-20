@@ -1,0 +1,45 @@
+10.201.123.52
+
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.9 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   3072 db:e9:fb:89:66:1e:d9:00:20:80:6e:d9:58:de:af:29 (RSA)
+|   256 7a:72:15:9d:8b:c3:79:3e:a9:40:0e:60:2c:93:6f:2f (ECDSA)
+|_  256 af:b2:34:e6:4d:55:ee:9e:2c:43:ac:e1:71:66:20:e2 (ED25519)
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+| http-methods:
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-title: Did not follow redirect to http://lookup.thm
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.htpasswd            (Status: 403) [Size: 278]
+/.hta                 (Status: 403) [Size: 278]
+/.htaccess            (Status: 403) [Size: 278]
+/index.php            (Status: 302) [Size: 0] [--> http://lookup.thm]
+/server-status        (Status: 403) [Size: 278]
+Progress: 4624 / 4624 (100.00%)
+===============================================================
+
+eliFinder rodando ocm versao vulneravel a redirect
+
+EXiste um arquivo .passwords no diretorio do user think
+
+um binario com suid setado foi encontado.
+
+ele executa o ID sem o caminho absoluto.
+
+para se aproveitar criamos um id modificado para que esse binario execute.
+
+[22][ssh] host: lookup.thm   login: think   password: josemario.AKA(think)
+
+Binario look,pdoemos executar com sudo.
+
+usamos ele para ler o conteudo da id_rsa o usuario root.
