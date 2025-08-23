@@ -1,0 +1,34 @@
+10.201.115.153
+
+um diretorio possivel a ser montado: /mnt/share
+
+Uma vez que montamos um diretorio remoto, para acessar os arquivos precisamos criar uma usuario com o memso UID do dono do diretorio.
+
+Acessando esse diretorio, vemos as credencias:
+
+ftpuser:W3stV1rg1n14M0un741nM4m4
+
+GET /index.php HTTP/1.1
+Host: 10.201.115.153
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: http://10.201.115.153/login.php
+Connection: keep-alive
+Cookie: PHPSESSID=dXNlcjo1ZjRkY2MzYjVhYTc2NWQ2MWQ4MzI3ZGViODgyY2Y5OQ%3D%3D
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
+
+
+RCE no painel de admin
+
+Sempre tentar mais de um payload de revshell na presenca de filtro.
+
+
+Sempre bom olhar config.php
+La continha a senha do user rick.
+
+Login via ssh (password reusage)
+
+Priv esc se aproveitando de envirometn variables com sudo.
