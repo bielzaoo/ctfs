@@ -1,0 +1,71 @@
+10.201.11.41
+
+PORT     STATE SERVICE
+22/tcp   open  ssh
+8000/tcp open  http-alt
+
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 8.2p1 Ubuntu 4ubuntu0.13 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   3072 a2:a2:29:c7:45:3b:20:b1:3e:25:f5:8b:60:c8:4f:e2 (RSA)
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDNsR/QhJ9pNeHGY1X1MwP83iSEeQw3BuHFkP2/mzNpFpI26aePZobf2RYOkoFFROukIO22j+UyNyF44Q8vzX73BmivGq0ooIJ753lZ4Aq+EzFSEtljvUClCaPaoQJO0DxftjrD46/vY2XSfSmY5qDR9S2nvIvl4Lmp234FmUdGyXTh5eyGErnMdh15TpwE31mJSBUJFnFXHTz3I7eMRZWbhXc5LtAJgZ2+Q2VmMgZj3k9YilAC1eVJTAL4FcxI04dlkSOJGNGgVAvge86SNGIAxOeAApRrQDoH9KXWPsgzNMDs7Ax8ViA3e1feKup02yTGEx6/7CeAqUyO2YoHbrdAna+gShQ3EeSTZK+ggaSW8fFWbAdSfAKVFp4AdXMlNGm3l5HbJkU5mBI0uoxy0JyO6EdvqCamllwP8DP60ZcTA22xfG847iKzPo/8sfm1/D0GC+9HAW3ZSNx54KJxhxCHZiyU1CTxaEsCqNnuZ5iB53TjFNTNASDKrrbifJEw87U=
+|   256 15:e3:0c:2d:6b:22:96:96:74:4d:24:7a:4e:2b:d9:b4 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIAiB0LuYSrOPMS+fiftojG8XaFXuYBdH65N9cwZukaCAq8RMnS2UYwHmGgfqPQrbFxn1Dy+CXBa5I21vqYBots=
+|   256 94:99:33:f4:86:56:bd:61:04:8b:c7:ba:d4:d6:71:2a (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEfOVrTSfaD7NGiTq0cj2s5k5KgB99Uy+ol2kUF1Xs8P
+8000/tcp open  http-alt SimpleHTTP/0.6 Python/3.11.2
+|_http-favicon: Unknown favicon MD5: FBD3DB4BEF1D598ED90E26610F23A63F
+| http-methods:
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: SimpleHTTP/0.6 Python/3.11.2
+| fingerprint-strings:
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, JavaRMI, LANDesk-RC, NotesRPC, Socks4, X11Probe, afp, giop:
+|     source code string cannot contain null bytes
+|   FourOhFourRequest, LPDString, SIPOptions:
+|     invalid syntax (<string>, line 1)
+|   GetRequest:
+|     name 'GET' is not defined
+|   HTTPOptions, RTSPRequest:
+|     name 'OPTIONS' is not defined
+|   Help:
+|_    name 'HELP' is not defined
+|_http-title: Site doesn't have a title (text/html; charset=utf-8).
+|_http-open-proxy: Proxy might be redirecting requests
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8000-TCP:V=7.94SVN%I=7%D=8/20%Time=68A62F8C%P=x86_64-pc-linux-gnu%r
+SF:(GenericLines,1,"\n")%r(GetRequest,1A,"name\x20'GET'\x20is\x20not\x20de
+SF:fined\n")%r(X11Probe,2D,"source\x20code\x20string\x20cannot\x20contain\
+SF:x20null\x20bytes\n")%r(FourOhFourRequest,22,"invalid\x20syntax\x20\(<st
+SF:ring>,\x20line\x201\)\n")%r(Socks4,2D,"source\x20code\x20string\x20cann
+SF:ot\x20contain\x20null\x20bytes\n")%r(HTTPOptions,1E,"name\x20'OPTIONS'\
+SF:x20is\x20not\x20defined\n")%r(RTSPRequest,1E,"name\x20'OPTIONS'\x20is\x
+SF:20not\x20defined\n")%r(DNSVersionBindReqTCP,2D,"source\x20code\x20strin
+SF:g\x20cannot\x20contain\x20null\x20bytes\n")%r(DNSStatusRequestTCP,2D,"s
+SF:ource\x20code\x20string\x20cannot\x20contain\x20null\x20bytes\n")%r(Hel
+SF:p,1B,"name\x20'HELP'\x20is\x20not\x20defined\n")%r(LPDString,22,"invali
+SF:d\x20syntax\x20\(<string>,\x20line\x201\)\n")%r(SIPOptions,22,"invalid\
+SF:x20syntax\x20\(<string>,\x20line\x201\)\n")%r(LANDesk-RC,2D,"source\x20
+SF:code\x20string\x20cannot\x20contain\x20null\x20bytes\n")%r(NotesRPC,2D,
+SF:"source\x20code\x20string\x20cannot\x20contain\x20null\x20bytes\n")%r(J
+SF:avaRMI,2D,"source\x20code\x20string\x20cannot\x20contain\x20null\x20byt
+SF:es\n")%r(afp,2D,"source\x20code\x20string\x20cannot\x20contain\x20null\
+SF:x20bytes\n")%r(giop,2D,"source\x20code\x20string\x20cannot\x20contain\x
+SF:20null\x20bytes\n");
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Ao acessar a pagina web recebemos uma string "try a more basic connection" e linkando com a saido do nmapos metodos padreoes HTTP parecem nao estar ativados.
+Tentando com o nc recebemos resutlados interessantes.
+
+Uma boa eh para ver se temos um diretorio de e-mail.
+
+sempre olhar o diretorio /opt tambem eh uma boa.
+
+Achou um .git, caso haja um config file eh sempre interessante dar uma olhada.
+
+[credential "https://github.com"]
+        username = think
+        password = _TH1NKINGPirate$_
+
+Reutilizacao de credenciais no SSH.
+
+Diretorios .git possuem historico de versao, dar uma olhada nos da algo interessante.
