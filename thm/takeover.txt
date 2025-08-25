@@ -1,0 +1,8 @@
+10.201.89.54
+
+subdomains:
+portal
+
+portal.futurevera.thm is only availiable via internal VPN 
+
+Olhando o certifica mais a fundo, vemos mais um subdominio.

